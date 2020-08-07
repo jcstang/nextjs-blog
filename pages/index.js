@@ -32,8 +32,8 @@ export default function Home() {
             href="https://github.com/zeit/next.js/tree/master/examples"
             className="card"
           >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
+            <h3>Examples &rarr; &rarr;</h3>
+            <p>Discover and deploy boilerplate example Next.js projects and stuff and stuff...</p>
           </a>
 
           <a
