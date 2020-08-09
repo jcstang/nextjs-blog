@@ -1,44 +1,52 @@
-import Head from 'next/head'
+import Head from 'next/head';
+import Link from 'next/link';
+import { getSortedPostsData } from '../lib/posts';
 
-export default function Home() {
+export default function Home({ allPostsData }) {
   return (
-    <div className="container">
+    <div className='container'>
       <Head>
         <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel='icon' href='/favicon.ico' />
       </Head>
 
       <main>
-        <h1 className="title">
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+        <h1 className='title'>
+          Read{' '}
+          <Link href='/posts/first-post'>
+            <a>this page!</a>
+          </Link>
         </h1>
 
-        <p className="description">
+        <p className='description'>
           Get started by editing <code>pages/index.js</code>
         </p>
 
-        <div className="grid">
-          <a href="https://nextjs.org/docs" className="card">
+        <div className='grid'>
+          <a href='https://nextjs.org/docs' className='card'>
             <h3>Documentation &rarr;</h3>
             <p>Find in-depth information about Next.js features and API.</p>
           </a>
 
-          <a href="https://nextjs.org/learn" className="card">
+          <a href='https://nextjs.org/learn' className='card'>
             <h3>Learn &rarr;</h3>
             <p>Learn about Next.js in an interactive course with quizzes!</p>
           </a>
 
           <a
-            href="https://github.com/zeit/next.js/tree/master/examples"
-            className="card"
+            href='https://github.com/zeit/next.js/tree/master/examples'
+            className='card'
           >
             <h3>Examples &rarr; &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects and stuff and stuff...</p>
+            <p>
+              Discover and deploy boilerplate example Next.js projects and stuff
+              and stuff...
+            </p>
           </a>
 
           <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
+            href='https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
+            className='card'
           >
             <h3>Deploy &rarr;</h3>
             <p>
@@ -46,16 +54,30 @@ export default function Home() {
             </p>
           </a>
         </div>
+        <section className='hi'>
+          <h2 className='hi'>Blog</h2>
+          <ul className='hi'>
+            {allPostsData.map(({ id, date, title }) => (
+              <li className='hi' key={id}>
+                {title}
+                <br />
+                {id}
+                <br />
+                {date}
+              </li>
+            ))}
+          </ul>
+        </section>
       </main>
 
       <footer>
         <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          href='https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app'
+          target='_blank'
+          rel='noopener noreferrer'
         >
           Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
+          <img src='/vercel.svg' alt='Vercel Logo' className='logo' />
         </a>
       </footer>
 
@@ -205,5 +227,14 @@ export default function Home() {
         }
       `}</style>
     </div>
-  )
+  );
+}
+
+export async function getStaticProps() {
+  const allPostsData = getSortedPostsData();
+  return {
+    props: {
+      allPostsData,
+    },
+  };
 }
