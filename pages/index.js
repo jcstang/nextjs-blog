@@ -204,6 +204,10 @@ export default function Home({ allPostsData }) {
           height: 1em;
         }
 
+        h1 {
+          background-color: aquamarine;
+        }
+
         @media (max-width: 600px) {
           .grid {
             width: 100%;
